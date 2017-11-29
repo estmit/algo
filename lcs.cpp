@@ -5,6 +5,8 @@
 #include <cassert>
 #include <cmath> // remove after binary_string_set() has been impl'ed
 
+//#include <timer.h>    // need for computing cpu time
+
 using namespace std;
 
 vector<string> binary_string_set(unsigned n) {
