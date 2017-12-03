@@ -1,11 +1,14 @@
 #include <vector>
 #include <string>
 #include <utility>
+#include <algorithm>
 #include <iostream>
 #include <cassert>
 #include <cmath> // remove after binary_string_set() has been impl'ed
 
-//#include <timer.h>    // need for computing cpu time
+extern "C"{
+#include "timer.h"
+}
 
 using namespace std;
 
@@ -35,13 +38,6 @@ unsigned lcs(const string &s1, const string &s2) {
         }
     }
     return common[n][n];
-}
-
-int max(int a, int b) {
-    if(a>b)
-      return a;
-    else
-      return b;
 }
 
 pair<string, string> distinct_lcs(const vector<string> &s, vector<string> &lcs) {
