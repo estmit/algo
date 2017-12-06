@@ -32,28 +32,38 @@ vector<string> binary_string_set(unsigned n, unsigned sz) {
     return res;
 }
 
-vector<string> lcs(const string &s1, const string &s2) {
+unsigned lcs_memoization(const string &s1, const string &s2) {
     //s1 and s2 should have same length, n
     //returns length of LCS first
-    //const int n = s1.length();
+    //redo with dynamic programming
+    int n = s1.length();
+    vector <vector<int>> common (n+1, vector<int>(n+1, 0));
+    vector <vector<string>> lcstring(n+1, vector<string>(n+1, ""));
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++){
+            // cout << "i: " << i << "\t j: " << j << endl;
+            // cout << "s1: " << s1[i-1] << "\t s2: " << s2[j-1] << endl;
+            if (s1[i-1] == s2[j-1]) {
+              common[i][j] = common[i-1][j-1] + 1;
+              lcstring[i][j] = lcstring[i-1][j-1] + s1[i-1];
+            }
 
-//    const int n = 4;
-//    if (n < 1)
-//      return 0;
-//    int common[n+1][n+1] = {{0}};
-//    for (int i = 1; i <= n; i++) {
-//        for (int j = 1; j <= n; j++){
-//            cout << "i: " << i << "\t j: " << j << endl;
-//            cout << "s1: " << s1[i-1] << "\t s2: " << s2[j-1] << endl;
-//            if (s1[i-1] == s2[j-1])
-//                common[i][j] = common[i-1][j-1] + 1;
-//            else
-//                common[i][j] = max(common[i-1][j], common[i][j-1]);
-//            cout << "common: " << common[i][j] << endl;
-//        }
-//    }
-//    return common[n][n];
-    return {};
+            else{
+              common[i][j] = max(common[i-1][j], common[i][j-1]);
+              if(lcstring[i-1][j].length() > lcstring[i][j-1].length())
+                lcstring[i][j] = lcstring[i-1][j];
+              else
+                lcstring[i][j] = lcstring[j][i-1];
+            }
+            // cout << "common: " << common[i][j] << endl;
+        }
+    }
+    // cout << "lcstring: " << lcstring[n][n] << endl;
+    return common[n][n];
+}
+
+vector <string> lcs(const string &s1, const string &s2) {
+
 }
 
 pair<string, string> distinct_lcs(const vector<string> &bstr, vector<string> &lcs_res) {
@@ -83,11 +93,10 @@ void print_strings(const vector<string> &s) {
 
 int main() {
 
-    //testing LCS algorithm
-//    string s1 = "1001";
-//    string s2 = "0100";
-//    int result = lcs(s1,s2);
-//    cout << "lcs length: " << result << endl;
+    // string s1 = "1001";
+    // string s2 = "0110";
+    // int result = lcs(s1,s2);
+    // cout << "lcs length: " << result << endl;
 
     // n = 4
     auto set_1_strings = binary_string_set(4, 16);
