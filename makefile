@@ -4,7 +4,10 @@ CXXFLAGS = -Wall -std=c++11
 
 TARGET = main
 
-all: $(TARGET)
+all:	
+	. /usr/share/Modules/init/bash; \
+	module load gcc/5.4.0; \
+	$(TARGET)
 
 $(TARGET) : lcs.o timer.o
 	$(CXX) $(CXXFLAGS) -o $(TARGET) lcs.o timer.o
