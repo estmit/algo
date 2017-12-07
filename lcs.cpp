@@ -6,6 +6,7 @@
 #include <cassert>
 #include <cmath>
 #include <stdlib.h>
+#include <stdio.h>
 
 extern "C"{
     #include "timer.h"
@@ -86,7 +87,10 @@ void make_distinct_list(string s1, string s2, char data[], int indx1, int indx2,
 	   // if currlcs is equal to lcslen then store the unique lcs
     int n = s1.length();
   	if (currlcs == lcslen) {
-        dlcs.push_back(data);
+        string s = "";
+        for (int i = 0; i < lcslen; i++)
+            s = s + data[i];
+        dlcs.push_back(s);
     		return;
   	}
 
