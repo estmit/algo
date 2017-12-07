@@ -13,9 +13,9 @@ static double   old_time;
 /* Return the amount of time in seconds used by the current process since
    it began. */
 #ifdef __STDC__
-double  user_time (void) 
+double  user_time (void)
 #else
-double  user_time () 
+double  user_time ()
 #endif
 {
     struct rusage   t;
@@ -29,9 +29,9 @@ double  user_time ()
 
 /* Starts timer. */
 #ifdef __STDC__
-void start_timer (void) 
+void start_timer (void)
 #else
-start_timer () 
+start_timer ()
 #endif
 {
     timer_set = TRUE;
@@ -39,12 +39,12 @@ start_timer ()
 }
 
 
-/* Returns elapsed time since last call to start_timer().  Returns ERROR_VALUE
+/* Returns elapsed time since last call to start_timer().  Returns ERROR_VALUE */
 /* if Start_Timer() has never been called. */
 #ifdef __STDC__
-double  elapsed_time (void) 
+double  elapsed_time (void)
 #else
-double  elapsed_time () 
+double  elapsed_time ()
 #endif
 {
     if      (timer_set == FALSE) {
